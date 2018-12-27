@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+}
+
+.full-screen {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    max-height: 820px;
+}
+
+main {
+    overflow: hidden;
+    position: absolute;
+}
+
+.playground {
+    content: "";
+
+    background: url("images/map.png");
+    background-size: cover;
+
+    position: absolute;
+}
