@@ -4,7 +4,7 @@ body {
 
 .full-screen {
     width: 100%;
-    max-width: 400px;
+    max-width: 430px;
     height: 100vh;
     max-height: 820px;
 }
@@ -12,6 +12,38 @@ body {
 main {
     overflow: hidden;
     position: absolute;
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    padding: 5%;
+    z-index: 100;
+}
+
+.panel {
+    margin-left: 15px;
+    position: relative;
+    display: flex;
+}
+.panel-bg {
+    height: 40px;
+    content: url("images/panel-bg.png");
+    position: absolute;
+    z-index: 99;
+}
+.panel .soul-icon {
+    margin-left: -15px;
+    width: 40px;
+    height: 40px;
+    content: url("images/soul.png");
+    z-index: 100;
+}
+.panel .score-label {
+    line-height: 40px;
+    margin-left: 8px;
+    color: white;
+    z-index: 100;
 }
 
 .playground {
@@ -22,3 +54,20 @@ main {
 
     position: absolute;
 }
+
+.ground {
+    position: absolute;
+    width: 40%;
+}
+
+.action-animation, .ground-bg {
+    width: 100%;
+    position: absolute;
+}
+
+.action-animation {
+    margin-top: -50%;
+}
+
+
+
