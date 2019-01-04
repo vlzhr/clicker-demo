@@ -1,12 +1,15 @@
 body {
     margin: 0;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-family: "Open Sans", sans-serif;
 }
 
 .full-screen {
     width: 100%;
-    max-width: 430px;
+    max-width: 377px;
     height: 100vh;
-    max-height: 820px;
+    max-height: 600px;
 }
 
 main {
@@ -31,6 +34,12 @@ header {
     content: url("images/panel-bg.png");
     position: absolute;
     z-index: 99;
+}
+.ground-bg.lightened {
+    margin-top: -10%;
+}
+.ground-bg.active {
+    margin-top: 5%;
 }
 .panel .soul-icon {
     margin-left: -15px;
@@ -66,8 +75,127 @@ header {
 }
 
 .action-animation {
-    margin-top: -50%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: -42%;
+}
+
+.ground-price {
+    position: absolute;
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+}
+.ground-price.hidden {
+    opacity: 0;
+}
+
+.ground-price-icon {
+    width: 30%;
+    margin: 0 auto;
+    content: url("images/soul.png");
+    animation: iconAnimation infinite 1s;
+}
+@keyframes iconAnimation {
+    0% { margin-top: 0; }
+    50% {
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+    100% { margin-top: 0; }
 }
 
 
+.loading-bar-label {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.loading-bar {
+    position: absolute;
+    width: 60%;
+    background-color: #26a9e0;
+    content: "";
+    height: 9px;
+    left: 20%;
+    border-radius: 7px;
+}
+.loading-bar::before {
+    background: url("images/soul.png");
+    background-size: cover;
+    content: "";
+    height: 27px;
+    width: 27px;
+    position: absolute;
+    top: -9px;
+    left: -9px;
+    display: block;
+}
+.loading-bar.animated {
+    animation: barLoading 1 1s;
+}
+.loading-bar.animated::before {
+    display: none;
+}
+@keyframes barLoading {
+    0% { width: 0; }
+    100% { width: 60%; }
+}
+
+.moving-icon {
+    opacity: 0;
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    background: url("images/soul.png");
+    background-size: cover;
+    z-index: 400;
+}
+.moving-icon.shown {
+    transition: margin-top .9s, margin-left .9s, width .9s, height .9s;
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.cursor {
+    pointer-events: none;
+    position: absolute;
+    width: 100px;
+    z-index: 300;
+    opacity: 0;
+}
+.cursor.shown {
+    opacity: 1;
+}
+
+.winscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(100,100,100,0.8);
+    z-index: 400;
+    opacity: 0;
+    pointer-events: none;
+}
+.winscreen-window {
+    width: 90%;
+    content: url("images/winscreen.png");
+    left: 5%;
+    top: 10%;
+    margin: 0 auto;
+    position: absolute;
+}
+.winscreen.shown {
+    transition: opacity .8s;
+    opacity: 1;
+    pointer-events: auto;
+}
 
