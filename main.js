@@ -88,6 +88,11 @@ function Ground(name, active, productivity, price, loc) {
         if (this.priceNode) { this.priceNode.classList.add("hidden"); }
     };
     this.addLoadingBar  = () => {
+        this.underLoadingBarNode = document.createElement("div");
+        this.underLoadingBarNode.classList.add("under-loading-bar");
+        this.underLoadingBarNode.style["top"] = defaults.groundHeight - 9 + "px";
+        this.node.appendChild(this.underLoadingBarNode);
+
         this.loadingBarNode = document.createElement("div");
         this.loadingBarNode.classList.add("loading-bar");
         this.loadingBarNode.style["top"] = defaults.groundHeight - 9 + "px";
@@ -232,10 +237,28 @@ document.addEventListener("DOMContentLoaded", function() {
     window.grounds[1].show();
     window.grounds[0].show();
 
-    cursor.show(34,64);
+    window.preview = {
+        node: document.querySelector(".preview"),
+        curtainNode: document.querySelector(".curtain"),
+        show: function() {
+            this.node.classList.add("shown");
+            this.curtainNode.classList.add("shown");
+        },
+        hide: function() {
+            this.node.classList.remove("shown");
+            this.curtainNode.classList.remove("shown");
+        }
+    };
 
-    playground.node.addEventListener("click", function(event) {
+    function showPreview() {
+        window.preview.show();
+        window.setTimeout(function () {
+            window.preview.hide();
+            window.cursor.show(34, 64);
+        }, 3000);
+    }
 
-    });
+    // showPreview();
+
 });
 

@@ -20,8 +20,11 @@ main {
 header {
     position: absolute;
     width: 100%;
+    box-sizing: border-box;
     padding: 5%;
     z-index: 100;
+    display: flex;
+    justify-content: space-between;
 }
 
 .panel {
@@ -35,6 +38,14 @@ header {
     position: absolute;
     z-index: 99;
 }
+
+.logo {
+    content: url("images/logo.png");
+    height: 80px;
+    margin-top: -8px;
+}
+
+
 .ground-bg.lightened {
     margin-top: -10%;
 }
@@ -62,6 +73,21 @@ header {
     background-size: cover;
 
     position: absolute;
+}
+
+.smoke-1 {
+    content: url("animations/smoke-2.gif");
+    position: absolute;
+    width: 20%;
+    left: 0%;
+    bottom: 35.5%;
+}
+.smoke-2 {
+    content: url("animations/smoke-1.gif");
+    position: absolute;
+    width: 20%;
+    left: 0%;
+    bottom: 22.5%;
 }
 
 .ground {
@@ -118,10 +144,22 @@ header {
     color: white;
 }
 
+.under-loading-bar {
+    position: absolute;
+    width: 61%;
+    background-image: url("images/progress-bar-bg.png");
+    background-size: cover;
+    content: "";
+    height: 9px;
+    left: 20%;
+    border-radius: 7px;
+}
 .loading-bar {
     position: absolute;
-    width: 60%;
-    background-color: #26a9e0;
+    width: 60.5%;
+    background-image: url("images/progress-bar.png");
+    background-size: cover;
+    /*background: #26a9e0;*/
     content: "";
     height: 9px;
     left: 20%;
@@ -193,9 +231,75 @@ header {
     margin: 0 auto;
     position: absolute;
 }
+.winscreen-button {
+    content: url("images/download-button.png");
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    top: 61%;
+}
 .winscreen.shown {
     transition: opacity .8s;
     opacity: 1;
     pointer-events: auto;
 }
+
+.curtain {
+    background-color: rgba(100,50,70,0.6);
+    transition: opacity .9s;
+    opacity: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.curtain.shown {
+    z-index: 500;
+    opacity: 1;
+}
+.preview {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    max-height: 600px;
+    width: 100%;
+    z-index: 500;
+    margin-left: 100%;
+    transition: margin .9s;
+}
+.preview.shown {
+    margin-left: 0%;
+}
+.demon {
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    max-height: 600px;
+    margin: 0 auto;
+    z-index: 500;
+    content: url("images/demon.png");
+}
+.window {
+    width: 58%;
+    min-width: 240px;
+    height: 28%;
+    background: url("images/window.png") no-repeat;
+    background-size: 100%;
+    position: absolute;
+    bottom: 40%;
+    left: 2%;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.window span {
+    display: block;
+    max-width: 60%;
+    font-size: 19px;
+    margin: 35px auto 0;
+}
+
 
