@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 3000);
     }
 
-    // showPreview();
+    showPreview();
 
 });
 
