@@ -250,6 +250,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
+    var images = [];
+    function preload() {
+        for (var i = 0; i < arguments.length; i++) {
+            images[i] = new Image();
+            images[i].src = preload.arguments[i];
+        }
+    }
+
+    //-- usage --//
+    preload(
+        "images/map.png"
+    );
+
     function showPreview() {
         window.preview.show();
         window.setTimeout(function () {
@@ -258,7 +271,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 3000);
     }
 
-    showPreview();
+    window.setTimeout(() => {
+        showPreview();
+    }, 1000);
+
+
 
 });
 
