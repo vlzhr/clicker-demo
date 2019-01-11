@@ -1,8 +1,10 @@
 body {
     margin: 0;
     color: white;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    font-family: "Open Sans", sans-serif;
+    text-shadow: -1.5px 0 black, 0 1.5px black, 1.5px 0 black, 0 -1.5px black;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: 700;
+    /*letter-spacing: 1px;*/
 }
 
 .full-screen {
@@ -158,6 +160,7 @@ header {
     position: absolute;
     width: 60.5%;
     background-image: url("images/progress-bar.png");
+    background-repeat: no-repeat;
     background-size: cover;
     /*background: #26a9e0;*/
     content: "";
@@ -184,7 +187,7 @@ header {
 }
 @keyframes barLoading {
     0% { width: 0; }
-    100% { width: 60%; }
+    100% { width: 60.5%; }
 }
 
 .moving-icon {
@@ -245,7 +248,7 @@ header {
 }
 
 .curtain {
-    background-color: rgba(100,50,70,0.6);
+    background-color: rgba(50,50,50,0.7);
     transition: opacity .9s;
     opacity: 0;
     content: "";
