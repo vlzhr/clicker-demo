@@ -16,7 +16,7 @@ score.__proto__.tryChange = function (value) {
 
 var triggers = [
     {
-        limit: 1,
+        limit: 3,
         reaction: function () {
             window.grounds[1].setLightened();
         }
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.grounds = [
         new Ground("Spanking", "active", 1, 0, [20, 64]),
-        new Ground("GlassScratch", "non", 10, 1, [36, 49]),
+        new Ground("GlassScratch", "non", 10, 3, [36, 49]),
         new Ground("Tickling", "non", 300, 30, [5, 35]),
         new Ground("Spanking", "final", 1, 1000, [27, 24])
     ];
@@ -260,11 +260,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //-- usage --//
     preload(
-        "images/map.png"
+        "images/map.png",
+        "images/opened-ground.png",
+        "images/lightened-ground.png",
+        "animations/Tickling/3.gif",
+        "animations/Tickling/2.gif",
+        "animations/GlassScratch/3.gif",
+        "animations/GlassScratch/2.gif"
     );
 
     function showPreview() {
-        window.preview.show();
+        // window.preview.show();
         window.setTimeout(function () {
             window.preview.hide();
             window.cursor.show(34, 64);
@@ -273,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.setTimeout(() => {
         showPreview();
-    }, 1000);
+    }, 0);
 
 
 

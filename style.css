@@ -1,9 +1,20 @@
 body {
     margin: 0;
     color: white;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    /*text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;*/
+    /*-webkit-text-fill-color: white; */
+
+    /*-webkit-text-stroke-width: 1px;*/
+    /*-webkit-text-stroke-color: black;*/
+
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+
     font-family: 'PT Sans Narrow', sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     /*letter-spacing: 1px;*/
 }
 
@@ -51,7 +62,7 @@ header {
 .ground-bg.lightened {
     width: 110%;
     margin-left: -5%;
-    margin-top: -16%;
+    margin-top: -16.9%;
 }
 .ground-bg.active {
     margin-top: 5%;
@@ -299,12 +310,6 @@ header {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-}
-.window span {
-    display: block;
-    max-width: 60%;
-    font-size: 19px;
-    margin: 35px auto 0;
 }
 
 
