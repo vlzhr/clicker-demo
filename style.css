@@ -202,7 +202,6 @@ header {
     0% { width: 0; }
     100% { width: 60.5%; }
 }
-
 .moving-icon {
     opacity: 0;
     position: absolute;
@@ -234,7 +233,7 @@ header {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(100,100,100,0.8);
+    background-color: rgba(38,28,60,0.7);
     z-index: 400;
     opacity: 0;
     pointer-events: none;
@@ -261,7 +260,7 @@ header {
 }
 
 .curtain {
-    background-color: rgba(50,50,50,0.7);
+    background-color: rgba(38,28,60,0.7);
     transition: opacity .9s;
     opacity: 0;
     content: "";

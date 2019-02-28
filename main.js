@@ -1,3 +1,5 @@
+var cursor;
+
 var defaults = {
     proportion: 900/565,
     groundProportion: 69/142, //  = height / width
@@ -119,16 +121,17 @@ function Ground(name, active, productivity, price, loc) {
     this.setLightened = () => {
         this.bgNode.src= "images/lightened-ground.png";
         this.bgNode.classList.add("lightened");
+        window.cursor.show(this.x+6, this.y+2);
     };
     this.show = () => {
         this.addNode();
         window.playground.node.appendChild(this.node);
     };
     this.animateAction = () => {
-        this.actionNode.src = "animations/" + this.name + "/3.gif";
+        this.runAnimation("action");
         this.loadingBarNode.classList.add("animated");
         window.setTimeout(() => {
-            this.actionNode.src = "animations/" + this.name + "/2.gif";
+            this.runAnimation("waiting");
             this.loadingBarNode.classList.remove("animated");
         }, defaults.interval);
     };
@@ -150,6 +153,35 @@ function Ground(name, active, productivity, price, loc) {
                 trigger();
             }, 1000);
         }
+    };
+    this.frames = {
+        "spanking": ['animations/spanking/frame_01_delay-0.04s.png', 'animations/spanking/frame_02_delay-0.04s.png', 'animations/spanking/frame_03_delay-0.04s.png', 'animations/spanking/frame_04_delay-0.04s.png', 'animations/spanking/frame_05_delay-0.04s.png', 'animations/spanking/frame_06_delay-0.04s.png', 'animations/spanking/frame_07_delay-0.04s.png', 'animations/spanking/frame_08_delay-0.04s.png', 'animations/spanking/frame_09_delay-0.04s.png', 'animations/spanking/frame_10_delay-0.04s.png', 'animations/spanking/frame_11_delay-0.04s.png', 'animations/spanking/frame_12_delay-0.04s.png', 'animations/spanking/frame_13_delay-0.04s.png', 'animations/spanking/frame_14_delay-0.04s.png', 'animations/spanking/frame_15_delay-0.04s.png', 'animations/spanking/frame_16_delay-0.04s.png', 'animations/spanking/frame_17_delay-0.04s.png', 'animations/spanking/frame_18_delay-0.04s.png', 'animations/spanking/frame_19_delay-0.04s.png', 'animations/spanking/frame_20_delay-0.04s.png', 'animations/spanking/frame_21_delay-0.04s.png', 'animations/spanking/frame_22_delay-0.04s.png', 'animations/spanking/frame_23_delay-0.04s.png', 'animations/spanking/frame_24_delay-0.04s.png', 'animations/spanking/frame_25_delay-0.04s.png', 'animations/spanking/frame_26_delay-0.04s.png', 'animations/spanking/frame_27_delay-0.04s.png'],
+        "tickling": ['animations/tickling/frame_01_delay-0.04s.png', 'animations/tickling/frame_02_delay-0.04s.png', 'animations/tickling/frame_03_delay-0.04s.png', 'animations/tickling/frame_04_delay-0.04s.png', 'animations/tickling/frame_05_delay-0.04s.png', 'animations/tickling/frame_06_delay-0.04s.png', 'animations/tickling/frame_07_delay-0.04s.png', 'animations/tickling/frame_08_delay-0.04s.png', 'animations/tickling/frame_09_delay-0.04s.png', 'animations/tickling/frame_10_delay-0.04s.png', 'animations/tickling/frame_11_delay-0.04s.png', 'animations/tickling/frame_12_delay-0.04s.png', 'animations/tickling/frame_13_delay-0.04s.png', 'animations/tickling/frame_14_delay-0.04s.png', 'animations/tickling/frame_15_delay-0.04s.png', 'animations/tickling/frame_16_delay-0.04s.png', 'animations/tickling/frame_17_delay-0.04s.png', 'animations/tickling/frame_18_delay-0.04s.png', 'animations/tickling/frame_19_delay-0.04s.png', 'animations/tickling/frame_20_delay-0.04s.png', 'animations/tickling/frame_21_delay-0.04s.png', 'animations/tickling/frame_22_delay-0.04s.png', 'animations/tickling/frame_23_delay-0.04s.png', 'animations/tickling/frame_24_delay-0.04s.png', 'animations/tickling/frame_25_delay-0.04s.png', 'animations/tickling/frame_26_delay-0.04s.png', 'animations/tickling/frame_27_delay-0.04s.png'],
+        "scratching": ['animations/scratching/frame_01_delay-0.04s.png', 'animations/scratching/frame_02_delay-0.04s.png', 'animations/scratching/frame_03_delay-0.04s.png', 'animations/scratching/frame_04_delay-0.04s.png', 'animations/scratching/frame_05_delay-0.04s.png', 'animations/scratching/frame_06_delay-0.04s.png', 'animations/scratching/frame_07_delay-0.04s.png', 'animations/scratching/frame_08_delay-0.04s.png', 'animations/scratching/frame_09_delay-0.04s.png', 'animations/scratching/frame_10_delay-0.04s.png', 'animations/scratching/frame_11_delay-0.04s.png', 'animations/scratching/frame_12_delay-0.04s.png', 'animations/scratching/frame_13_delay-0.04s.png', 'animations/scratching/frame_14_delay-0.04s.png', 'animations/scratching/frame_15_delay-0.04s.png', 'animations/scratching/frame_16_delay-0.04s.png', 'animations/scratching/frame_17_delay-0.04s.png', 'animations/scratching/frame_18_delay-0.04s.png', 'animations/scratching/frame_19_delay-0.04s.png', 'animations/scratching/frame_20_delay-0.04s.png', 'animations/scratching/frame_21_delay-0.04s.png', 'animations/scratching/frame_22_delay-0.04s.png', 'animations/scratching/frame_23_delay-0.04s.png', 'animations/scratching/frame_24_delay-0.04s.png', 'animations/scratching/frame_25_delay-0.04s.png', 'animations/scratching/frame_26_delay-0.04s.png', 'animations/scratching/frame_27_delay-0.04s.png']
+    };
+    this.animationLoop = (nonStop) => {
+        this.node.src = animations[this.animationName][this.step];
+        this.step++;
+        if (this.step >= animations[this.animationName].length) {this.step = 0}
+
+        if (nonStop) {
+            if (!this.on) {return;}
+            window.setTimeout(() => { this.loop(true); }, this.interval);
+        }
+    };
+    this.runAnimation = (animationName) => {
+        this.interval = animationSpeed;
+        this.animationName = this.name;
+        this.step = 0;
+        this.on = false;
+
+        this.node.onerror = () => {
+            this.step = 0;
+            this.node.src = "animations/" + this.animationName + "/frame_" + String(100 + this.step).slice(1) + "_delay-0.04s.png";
+        };
+
+        this.on = true;
+        this.animationLoop(true);
     };
 }
 
@@ -211,6 +243,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
+    window.playground.setSize();
+
+    defaults.groundHeight = window.playground.width * 0.4 * defaults.groundProportion;
+
     window.cursor = {
         node: document.querySelector(".cursor"),
         show: function (x, y) {
@@ -220,10 +256,6 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         hide: function () { this.node.classList.remove("shown"); }
     };
-
-    window.playground.setSize();
-
-    defaults.groundHeight = window.playground.width * 0.4 * defaults.groundProportion;
 
     window.grounds = [
         new Ground("Spanking", "active", 1, 0, [20, 64]),
@@ -266,7 +298,8 @@ document.addEventListener("DOMContentLoaded", function() {
         "animations/Tickling/3.gif",
         "animations/Tickling/2.gif",
         "animations/GlassScratch/3.gif",
-        "animations/GlassScratch/2.gif"
+        "animations/GlassScratch/2.gif",
+        "animations/Spanking/3.gif"
     );
 
     function showPreview() {
