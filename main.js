@@ -117,6 +117,7 @@ function Ground(name, active, productivity, price, loc) {
         this.bgNode.classList.remove("lightened");
         this.bgNode.classList.add("active");
         this.node.appendChild(this.actionNode);
+        this.runAnimation("waiting");
     };
     this.setLightened = () => {
         this.bgNode.src= "images/lightened-ground.png";
@@ -130,9 +131,11 @@ function Ground(name, active, productivity, price, loc) {
     this.animateAction = () => {
         this.runAnimation("action");
         this.loadingBarNode.classList.add("animated");
+        this.actionNode.classList.add("animated");
         window.setTimeout(() => {
             this.runAnimation("waiting");
             this.loadingBarNode.classList.remove("animated");
+            this.actionNode.classList.remove("animated");
         }, defaults.interval);
     };
     this.click = (event) => {
@@ -154,34 +157,41 @@ function Ground(name, active, productivity, price, loc) {
             }, 1000);
         }
     };
-    this.frames = {
-        "spanking": ['animations/spanking/frame_01_delay-0.04s.png', 'animations/spanking/frame_02_delay-0.04s.png', 'animations/spanking/frame_03_delay-0.04s.png', 'animations/spanking/frame_04_delay-0.04s.png', 'animations/spanking/frame_05_delay-0.04s.png', 'animations/spanking/frame_06_delay-0.04s.png', 'animations/spanking/frame_07_delay-0.04s.png', 'animations/spanking/frame_08_delay-0.04s.png', 'animations/spanking/frame_09_delay-0.04s.png', 'animations/spanking/frame_10_delay-0.04s.png', 'animations/spanking/frame_11_delay-0.04s.png', 'animations/spanking/frame_12_delay-0.04s.png', 'animations/spanking/frame_13_delay-0.04s.png', 'animations/spanking/frame_14_delay-0.04s.png', 'animations/spanking/frame_15_delay-0.04s.png', 'animations/spanking/frame_16_delay-0.04s.png', 'animations/spanking/frame_17_delay-0.04s.png', 'animations/spanking/frame_18_delay-0.04s.png', 'animations/spanking/frame_19_delay-0.04s.png', 'animations/spanking/frame_20_delay-0.04s.png', 'animations/spanking/frame_21_delay-0.04s.png', 'animations/spanking/frame_22_delay-0.04s.png', 'animations/spanking/frame_23_delay-0.04s.png', 'animations/spanking/frame_24_delay-0.04s.png', 'animations/spanking/frame_25_delay-0.04s.png', 'animations/spanking/frame_26_delay-0.04s.png', 'animations/spanking/frame_27_delay-0.04s.png'],
-        "tickling": ['animations/tickling/frame_01_delay-0.04s.png', 'animations/tickling/frame_02_delay-0.04s.png', 'animations/tickling/frame_03_delay-0.04s.png', 'animations/tickling/frame_04_delay-0.04s.png', 'animations/tickling/frame_05_delay-0.04s.png', 'animations/tickling/frame_06_delay-0.04s.png', 'animations/tickling/frame_07_delay-0.04s.png', 'animations/tickling/frame_08_delay-0.04s.png', 'animations/tickling/frame_09_delay-0.04s.png', 'animations/tickling/frame_10_delay-0.04s.png', 'animations/tickling/frame_11_delay-0.04s.png', 'animations/tickling/frame_12_delay-0.04s.png', 'animations/tickling/frame_13_delay-0.04s.png', 'animations/tickling/frame_14_delay-0.04s.png', 'animations/tickling/frame_15_delay-0.04s.png', 'animations/tickling/frame_16_delay-0.04s.png', 'animations/tickling/frame_17_delay-0.04s.png', 'animations/tickling/frame_18_delay-0.04s.png', 'animations/tickling/frame_19_delay-0.04s.png', 'animations/tickling/frame_20_delay-0.04s.png', 'animations/tickling/frame_21_delay-0.04s.png', 'animations/tickling/frame_22_delay-0.04s.png', 'animations/tickling/frame_23_delay-0.04s.png', 'animations/tickling/frame_24_delay-0.04s.png', 'animations/tickling/frame_25_delay-0.04s.png', 'animations/tickling/frame_26_delay-0.04s.png', 'animations/tickling/frame_27_delay-0.04s.png'],
-        "scratching": ['animations/scratching/frame_01_delay-0.04s.png', 'animations/scratching/frame_02_delay-0.04s.png', 'animations/scratching/frame_03_delay-0.04s.png', 'animations/scratching/frame_04_delay-0.04s.png', 'animations/scratching/frame_05_delay-0.04s.png', 'animations/scratching/frame_06_delay-0.04s.png', 'animations/scratching/frame_07_delay-0.04s.png', 'animations/scratching/frame_08_delay-0.04s.png', 'animations/scratching/frame_09_delay-0.04s.png', 'animations/scratching/frame_10_delay-0.04s.png', 'animations/scratching/frame_11_delay-0.04s.png', 'animations/scratching/frame_12_delay-0.04s.png', 'animations/scratching/frame_13_delay-0.04s.png', 'animations/scratching/frame_14_delay-0.04s.png', 'animations/scratching/frame_15_delay-0.04s.png', 'animations/scratching/frame_16_delay-0.04s.png', 'animations/scratching/frame_17_delay-0.04s.png', 'animations/scratching/frame_18_delay-0.04s.png', 'animations/scratching/frame_19_delay-0.04s.png', 'animations/scratching/frame_20_delay-0.04s.png', 'animations/scratching/frame_21_delay-0.04s.png', 'animations/scratching/frame_22_delay-0.04s.png', 'animations/scratching/frame_23_delay-0.04s.png', 'animations/scratching/frame_24_delay-0.04s.png', 'animations/scratching/frame_25_delay-0.04s.png', 'animations/scratching/frame_26_delay-0.04s.png', 'animations/scratching/frame_27_delay-0.04s.png']
+    this.actionFrames = {
+        "spanking": ['la/Spanking/Touch/1-min.png', 'la/Spanking/Touch/2-min.png', 'la/Spanking/Touch/3-min.png', 'la/Spanking/Touch/4-min.png', 'la/Spanking/Touch/5-min.png', 'la/Spanking/Touch/6-min.png', 'la/Spanking/Touch/7-min.png', 'la/Spanking/Touch/8-min.png', 'la/Spanking/Touch/9-min.png', 'la/Spanking/Touch/10-min.png', 'la/Spanking/Touch/11-min.png', 'la/Spanking/Touch/12-min.png'],
+        "tickling": ['la/Tickling/Touch/1-min.png', 'la/Tickling/Touch/2-min.png', 'la/Tickling/Touch/3-min.png', 'la/Tickling/Touch/4-min.png', 'la/Tickling/Touch/5-min.png', 'la/Tickling/Touch/6-min.png', 'la/Tickling/Touch/7-min.png', 'la/Tickling/Touch/8-min.png', 'la/Tickling/Touch/9-min.png', 'la/Tickling/Touch/10-min.png', 'la/Tickling/Touch/11-min.png', 'la/Tickling/Touch/12-min.png', 'la/Tickling/Touch/13-min.png', 'la/Tickling/Touch/14-min.png'],
+        "scratching": ['la/GlassScratch/Touch/1-min.png', 'la/GlassScratch/Touch/2-min.png', 'la/GlassScratch/Touch/3-min.png', 'la/GlassScratch/Touch/4-min.png', 'la/GlassScratch/Touch/5-min.png', 'la/GlassScratch/Touch/6-min.png', 'la/GlassScratch/Touch/7-min.png', 'la/GlassScratch/Touch/8-min.png', 'la/GlassScratch/Touch/9-min.png', 'la/GlassScratch/Touch/10-min.png', 'la/GlassScratch/Touch/11-min.png', 'la/GlassScratch/Touch/12-min.png', 'la/GlassScratch/Touch/13-min.png', 'la/GlassScratch/Touch/14-min.png']
     };
-    this.animationLoop = (nonStop) => {
-        this.node.src = animations[this.animationName][this.step];
+    this.waitingFrames = {
+        "spanking": ['la/Spanking/Idle/1-min.png', 'la/Spanking/Idle/2-min.png', 'la/Spanking/Idle/3-min.png', 'la/Spanking/Idle/4-min.png', 'la/Spanking/Idle/5-min.png', 'la/Spanking/Idle/6-min.png', 'la/Spanking/Idle/7-min.png', 'la/Spanking/Idle/8-min.png', 'la/Spanking/Idle/9-min.png', 'la/Spanking/Idle/10-min.png', 'la/Spanking/Idle/11-min.png'],
+        "tickling": ['la/Tickling/Idle/1-min.png', 'la/Tickling/Idle/2-min.png', 'la/Tickling/Idle/3-min.png', 'la/Tickling/Idle/4-min.png', 'la/Tickling/Idle/5-min.png', 'la/Tickling/Idle/6-min.png', 'la/Tickling/Idle/7-min.png', 'la/Tickling/Idle/8-min.png', 'la/Tickling/Idle/9-min.png', 'la/Tickling/Idle/10-min.png', 'la/Tickling/Idle/11-min.png', 'la/Tickling/Idle/12-min.png', 'la/Tickling/Idle/13-min.png', 'la/Tickling/Idle/14-min.png', 'la/Tickling/Idle/15-min.png'],
+        "scratching": ['la/GlassScratch/Idle/1-min.png', 'la/GlassScratch/Idle/2-min.png', 'la/GlassScratch/Idle/3-min.png', 'la/GlassScratch/Idle/4-min.png', 'la/GlassScratch/Idle/5-min.png', 'la/GlassScratch/Idle/6-min.png', 'la/GlassScratch/Idle/7-min.png', 'la/GlassScratch/Idle/8-min.png', 'la/GlassScratch/Idle/9-min.png', 'la/GlassScratch/Idle/10-min.png', 'la/GlassScratch/Idle/11-min.png', 'la/GlassScratch/Idle/12-min.png', 'la/GlassScratch/Idle/13-min.png', 'la/GlassScratch/Idle/14-min.png', 'la/GlassScratch/Idle/15-min.png']
+    };
+    this.stopPreviousAnimation = "";
+    this.animationLoop = (nonStop, animationType) => {
+        if (this.stopPreviousAnimation === animationType) {this.stopPreviousAnimation = ""; return;}
+        var frames = animationType === "waiting" ? this.waitingFrames : this.actionFrames;
+
+        this.actionNode.src = frames[this.animationName][this.step];
         this.step++;
-        if (this.step >= animations[this.animationName].length) {this.step = 0}
-
-        if (nonStop) {
-            if (!this.on) {return;}
-            window.setTimeout(() => { this.loop(true); }, this.interval);
-        }
-    };
-    this.runAnimation = (animationName) => {
-        this.interval = animationSpeed;
-        this.animationName = this.name;
-        this.step = 0;
-        this.on = false;
-
-        this.node.onerror = () => {
+        if (this.step >= frames[this.animationName].length) {
+            if (!nonStop) {
+                this.on = false;
+                return;
+            }
             this.step = 0;
-            this.node.src = "animations/" + this.animationName + "/frame_" + String(100 + this.step).slice(1) + "_delay-0.04s.png";
-        };
+        }
+
+        if (!this.on) {return;}
+        window.setTimeout(() => { this.animationLoop(nonStop, animationType); }, 1000 / frames[this.animationName].length);
+    };
+    this.runAnimation = (animationType) => {
+        this.stopPreviousAnimation = {"waiting": "action", "action": "waiting"}[animationType];
+        this.animationName = this.name.toLowerCase();
+        this.step = 0;
 
         this.on = true;
-        this.animationLoop(true);
+        this.animationLoop(animationType !== "action", animationType);
     };
 }
 
@@ -259,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.grounds = [
         new Ground("Spanking", "active", 1, 0, [20, 64]),
-        new Ground("GlassScratch", "non", 10, 3, [36, 49]),
+        new Ground("Scratching", "non", 10, 3, [36, 49]),
         new Ground("Tickling", "non", 300, 30, [5, 35]),
         new Ground("Spanking", "final", 1, 1000, [27, 24])
     ];
@@ -307,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function() {
         window.setTimeout(function () {
             window.preview.hide();
             window.cursor.show(34, 64);
-        }, 3000);
+        }, 0); //3000);
     }
 
     window.setTimeout(() => {
